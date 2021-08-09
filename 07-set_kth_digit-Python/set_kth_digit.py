@@ -5,7 +5,16 @@
 # so the 0th digit is the rightmost digit. 
 
 
-
 def fun_set_kth_digit(n, k, d):
-		return 0
+	x = str(abs(n))
+	l = len(x)
+	if(l == k):
+		x = str(d)+x
+	else:
+		x = x[:l-k-1]+str(d)+x[l-k:]
+	if(n < 0):
+		return -1*int(x)
+	else:
+		return int(x)
+print(fun_set_kth_digit(-468, 3, 1))
 
