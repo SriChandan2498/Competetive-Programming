@@ -5,8 +5,8 @@
 # each row starts at column 0. If either row or col 
 # are not legal values, return None, instead of crashing. 
 
-
-
-
+import math
 def fun_pascaltrianglevalue(row, col):
-	return 1
+	if(row < col):
+		return 0
+	return (math.factorial(row))//(math.factorial(row-col)*math.factorial(col))
