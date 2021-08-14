@@ -5,6 +5,19 @@
 
 
 def fun_kth_occurrences(s, n):
-	return 'a'
+	x = dict()
+	for i in s:
+		if(i not in x):
+			x[i] = 1
+		else:
+			x[i] += 1
+	freq = sorted(x.values(),reverse=True)[n-1]
+	for i in x:
+		if(x[i] == freq):
+			return i
+
+fun_kth_occurrences("helllo woorld", 2)
+	
+	
 
 
