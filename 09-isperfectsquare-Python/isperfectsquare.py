@@ -5,4 +5,19 @@
 
 def isperfectsquare(n):
 	# your code goes here
-	pass
+	x = None
+	if(type(n) == str):
+		try:
+			x = int(n)
+		except:
+			return False
+	x = int(n)
+	if(x < 0):
+		return False
+	y = (x)**0.5
+	if(y-int(y) == 0):
+		return True
+	else:
+		return False
+
+# print(isperfectsquare(6.25))
