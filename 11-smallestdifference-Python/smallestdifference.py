@@ -6,4 +6,13 @@
 
 def smallestdifference(a):
 	# Your code goes here
-	pass
+	if(a == []):
+		return -1
+	diff = set()
+	n = len(a)
+	for i in range(n):
+		for j in range(i+1,n):
+			diff.add(abs(a[i] - a[j]))
+	return min(diff)
+
+smallestdifference([19,2,83,6,27])
