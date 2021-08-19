@@ -7,6 +7,30 @@
 # Hint: you may wish to use a similar approach to how you solved isPerfectSquare on the hw.
 # Another hint: This can be written using just one or two lines of Python.
 
+def isperfectsquare(n):
+	# your code goes here
+	x = None
+	if(type(n) == str):
+		try:
+			x = int(n)
+		except:
+			return False
+	x = int(n)
+	if(x < 0):
+		return False
+	y = (x)**0.5
+	if(y-int(y) == 0):
+		return True
+	else:
+		return False
+	
 def largestperfectsquare(n):
 	# your code goes here
-	pass
+	if(isperfectsquare(n)):
+		return n
+	x = n
+	while(x > 0):
+		if(isperfectsquare(x)):
+			return x
+		x -= 1
+	
