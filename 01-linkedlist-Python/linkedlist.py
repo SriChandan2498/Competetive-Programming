@@ -20,15 +20,20 @@ class LinkedList(object):
     def append(self, new_element):
         # Your code goes here
         temp = self.head
-        while(temp):
+        while(temp.next):
             temp = temp.next
-        temp = new_element
+        temp.next = new_element
             
     def get_position(self, position):
         """Get an element from a particular position.
         Assume the first position is "1".
         Return "None" if position is not in the list."""
         # Your code goes here
+        if(position == 1):
+            if(self.head):
+                return self.head
+            else:
+                return None
         i = 1
         temp = self.head
         while(i <= position):
@@ -42,9 +47,12 @@ class LinkedList(object):
         Inserting at position 3 means between
         the 2nd and 3rd elements."""
         # Your code goes here
+        if(position == 1):
+            new_element.next = self.head
+            self.head = new_element
         i = 1
         temp = self.head
-        while(i <= position):
+        while(i < position):
             temp = temp.next
             i += 1
         if(temp):
@@ -63,3 +71,17 @@ class LinkedList(object):
             perv = temp
             temp = temp.next
         prev.next = temp.next
+
+e1 = Element(1)
+e2 = Element(2)
+e3 = Element(3)
+
+ll = LinkedList(e1)
+ll.append(e2)
+ll.append(e3)
+x = ll.head
+i = 1
+while(x):
+    print(x.value,'---->',i)
+    i += 1
+    x = x.next
