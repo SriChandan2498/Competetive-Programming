@@ -13,6 +13,18 @@
 # Again, you do not need to sort the list. We didn't sort it in our sample solution. We just tracked the two largest 
 # values as we recursively traversed the list. Also, you may not use loops/iteration in this problem
 
+def recursionhelper(l,maxi=-2*(10**9),secondmaxi=-2*(10**9)):
+	if(len(l) == 0):
+		return secondmaxi
+	if(l[0] >= maxi):
+		secondmaxi = maxi
+		maxi = l[0]
+	elif(l[0] >= secondmaxi):
+		secondmaxi = l[0]
+	return recursionhelper(l[1:],maxi,secondmaxi)
+
 def recursion_secondlargest(L):
 	# Your code goes here
-	pass
+	if(len(L) <= 1):
+		return None
+	return recursionhelper(L)
