@@ -12,6 +12,10 @@
 
 def areAnagrams(s1, s2):
     # Your code goes here...
-    pass
+    return set(s1) == set(s2)
 
 # write your test cases here...
+print(areAnagrams("area","reaa"))
+print(areAnagrams("","R"))
+print(areAnagrams("area","rea"))
+print(areAnagrams("",""))
