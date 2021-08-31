@@ -7,6 +7,47 @@
 # so fun_nthsmithnumber(0) should return 4
 # so fun_nthsmithnumber(1) should return 22
 
+def isPrime(n):
+    if(n < 2):
+        return False
+    if(n == 2):
+        return True
+    if(n%2 == 0):
+        return False
+    for i in range(3,round(n**0.5)+1,2):
+        if(n%i == 0):
+            return False
+    return True
+
+def getPrimeFactors(n):
+    res = list()
+    while(n%2 == 0):
+        res.append(2)
+        n //= 2
+    for i in range(3,round(n**0.5)+1,2):
+        while n % i== 0:
+            res.append(i)
+            n = n // i
+    if n > 2:
+        res.append(n)
+    return res
+
+def getsum(n):
+    print(list(str(n)))
+    return sum(map(int,list(str(n))))
+
+def isSmithNumber(n):
+    if(not isPrime(n) and (getsum(n) == sum([getsum(i) for i in getPrimeFactors(n)]))):
+        return True
+    return False
 
 def fun_nth_smithnumber(n):
-    return 1
+    count = -1
+    i = 0
+    while(count < n):
+        i += 1
+        if(isSmithNumber(i)):
+            count += 1
+    return i
+
+print(getsum(123))
