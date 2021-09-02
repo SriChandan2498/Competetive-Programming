@@ -25,13 +25,33 @@
 # (without hardcoding any test cases):
 
 class DataColumn: 
-    pass
+    def __init__(self,label,data):
+        super().__init__()
+        self.label = label
+        self.data = data
+    
+    def average(self):
+        return sum(self.data)/len(self.data)
 
 class DataTable:
-    pass
+    def __init__(self,csvdata):
+        super().__init__()
+        self.csvdata = csvdata.strip()
+    
+    def getColumn(self,n):
+        x = [i.strip() for i in self.csvdata.splitlines()]
+        label = x[0].split(',')[n]
+        data  = list()
+        for i in x[1:]:
+            data.append(int(i.split(',')[n]))
+        return DataColumn(label,data)
+
+    def getDims(self):
+        x = self.csvdata.splitlines()
+        return len(x),len(x[0].split(','))
 
 def almostEqual(a, b):
-    return True
+    return abs(a-b) < 10**(-9)
 
 def testDataTableAndDataColumnClasses():
     print('Testing DataTable and DataColumn classes...', end='')
@@ -56,3 +76,5 @@ def testDataTableAndDataColumnClasses():
     assert(column4.data == [92, 100])
     assert(almostEqual(column4.average(), 96))
     print('All test cases passed....!')
+
+testDataTableAndDataColumnClasses()
