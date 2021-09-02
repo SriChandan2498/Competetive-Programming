@@ -9,5 +9,26 @@
 
 import math
 
+def isKaprekarNumber(number):
+    n = int(math.pow(number,2))
+    s = str(n)
+    if(number==1):
+        return True
+    for i in range(1,len(s)):
+        Sum = 0
+        check = int(math.pow(10, i))
+        if(number==check):
+            return False
+        Sum = int(s[:i]) + int(s[i:])
+        if Sum == number:
+            return True
+    return False
+
 def fun_nth_kaprekarnumber(n):
-    return 1;
+	found = -1
+	guess = 0
+	while found < n:
+		guess += 1
+		if(isKaprekarNumber(guess)):
+			found += 1
+	return guess
