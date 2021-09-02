@@ -14,6 +14,31 @@
 # assert(nth_happy_number(7) == 28)
 # assert(nth_happy_number(8) == 31)
 
+def ishappynumber(n):
+	# your code goes here
+	if(n < 1):
+		return False
+	s = str(n)
+	flag = False
+	i = 0
+	while i<50:
+		l = list(map(int,list(s)))
+		l = [x*x for x in l]
+		print(l)
+		Sum = sum(l)
+		print(Sum)
+		if(Sum ==1):
+			flag = True
+			break
+		s = str(Sum)
+		i += 1
+	return flag
 
 def nth_happy_number(n):
-	return 0
+	found = 0
+	guess = 0
+	while found < n:
+		guess += 1
+		if(ishappynumber(guess)):
+			found += 1
+	return guess
