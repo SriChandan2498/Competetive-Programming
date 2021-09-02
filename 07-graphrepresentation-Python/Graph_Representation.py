@@ -1,3 +1,4 @@
+  
 class Node(object):
     def __init__(self, value):
         self.value = value
@@ -42,13 +43,33 @@ class Graph(object):
 
     def get_edge_list(self):
         edge_list = []
+        for edge in self.edges:
+            value = edge.value
+            nodefrom = edge.node_from.value
+            nodeto = edge.node_to.value
+            edge_list.append((value,nodefrom,nodeto))
         return edge_list
 
     def get_adjacency_list(self):
+        max_index = len(self.nodes)
         adjacency_list = [None] * (max_index + 1)
+        for edge in self.edges:
+            value = edge.value
+            nodefrom = edge.node_from.value
+            nodeto = edge.node_to.value
+            if adjacency_list[nodefrom]:
+                adjacency_list[nodefrom].append((nodeto,value))
+            else:
+                adjacency_list[nodefrom] = [(nodeto,value)]
         return adjacency_list
     
     
     def get_adjacency_matrix(self):
+        max_index = len(self.nodes)
         adjacency_matrix = [[0 for i in range(max_index + 1)] for j in range(max_index + 1)]
+        for edge in self.edges:
+            value = edge.value
+            nodefrom = edge.node_from.value
+            nodeto = edge.node_to.value
+            adjacency_matrix[nodefrom][nodeto] = value
         return adjacency_matrix
