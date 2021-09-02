@@ -38,7 +38,76 @@
 # assert(bonusPlayThreeDiceYahtzee(2333413) == (333, 29))
 # assert(bonusPlayThreeDiceYahtzee(2333555) == (555, 35))
 
+def checkdice(hand):
+    n = 0
+    x = hand%10
+    while(hand>0):
+        c = hand%10
+        if(x==c):
+            n += 1 
+        hand = hand//10
+    return n
+
+def match(hand):
+    a = 0
+    for i in str(hand):
+        if(i==a):
+            return [int(i),int(i)]
+        a = i
+    res = list(map(int, str(hand)))
+    return [max(res)]
+
+def playstep2(hand, dice):
+	# your code goes here
+    pairmatch = match(hand)
+    h = []
+    d = list(map(int, str(dice)))
+    if(len(pairmatch)>1):
+        h = pairmatch + [d[-1]]
+        d = d[:-1]
+    else:
+        if(len(d)>1):
+            h = pairmatch + d[-2:]
+            d = d[:-2]
+        else:
+            h = pairmatch + [d[1]] 
+            d = d[0]    
+    h.sort()
+    h = h[::-1]
+    handres = int("".join(list(map(str, h))))
+    if(len(d)>1):
+        diceres = int("".join(list(map(str, d))))
+    else:
+        diceres = d
+    return (handres,diceres)
+
+def handscore(n):
+    score = 0
+    if(str(n)[0]==str(n)[1]==str(n)[2]):
+        score += 20 + int(str(n)[0])*3
+    elif(str(n)[0]==str(n)[1] or str(n)[1]==str(n)[2]):
+        score += 10 + int(str(n)[1])*2
+    else:
+        score += max(list(map(int, str(n))))
+    return score
 
 def bonusplaythreediceyahtzee(dice):
 	# Your code goes here
-	pass
+    dice = str(dice)
+    hand = int(dice[-3:])
+    dice = int(dice[:-3])
+    score = 0
+    if(checkdice(hand)==3):
+        score += handscore(hand)
+        return (hand,score)
+    if(checkdice(hand)==2):
+        hand, dice = playstep2(hand, dice)
+        score += handscore(hand)
+    else:
+        hand, dice = playstep2(hand, dice)
+        if(checkdice(hand)==3):
+            score += handscore(hand)
+        else:
+            hand, dice = playstep2(hand, dice)
+            score += handscore(hand)
+    return (hand,score)
