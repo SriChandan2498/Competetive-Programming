@@ -19,4 +19,20 @@
 
 def ishappynumber(n):
 	# your code goes here
-	pass
+	if(n < 1):
+		return False
+	s = str(n)
+	flag = False
+	i = 0
+	while i<50:
+		l = list(map(int,list(s)))
+		l = [x*x for x in l]
+		print(l)
+		Sum = sum(l)
+		print(Sum)
+		if(Sum ==1):
+			flag = True
+			break
+		s = str(Sum)
+		i += 1
+	return flag
