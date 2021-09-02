@@ -10,28 +10,41 @@
 # If n is negative, return 0. Similarly, if k is negative, 
 # return 0.
 
-def power(a, b):
-    if b == 0:
+def power(x,y):
+    temp = 0
+    if( y == 0):
         return 1
+    temp = power(x, int(y / 2))
+    if (y % 2 == 0):
+        return temp * temp
     else:
-        return a * power(a, b-1)
-
-
-
-
-
-
-
-
-
-
-
+        return x * temp * temp
 
 def powerSum(n, k):
     # Your code goes here...
-    return 0
+    if(n<0 or k<0):
+        return 0
+    Sum = 0
+    for i in range(1,n+1):
+        Sum += power(i,k)
+    return Sum
 
-# Write your own test cases here...
-assert(powerSum(2,10) == 1025)
-assert(powerSum(3,10) == 60074)
-print ("All test cases passed...")
+def test():
+    # Write your own test cases here...
+    assert powerSum(10, 2)==385,'test case failed'
+    assert powerSum(0, 2)==0,'test case failed'
+    assert powerSum(10, 0)==10,'test case failed'
+    assert powerSum(10, 5)==220825,'test case failed'
+    assert powerSum(-10, 5)==0,'test case failed'
+    assert powerSum(10, -5)==0,'test case failed'
+    print ("All test cases passed...")
+
+test()
+
+
+
+
+
+
+
+
